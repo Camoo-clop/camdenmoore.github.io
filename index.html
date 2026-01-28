@@ -664,7 +664,10 @@
                         <div class="stat-number">2027</div>
                         <div class="stat-label">Graduation</div>
                     </div>
-                   
+                    <div class="stat-box">
+                        <div class="stat-number">3+</div>
+                        <div class="stat-label">Projects</div>
+                    </div>
                 </div>
             </div>
             <div class="hero-visual">
@@ -699,18 +702,18 @@
                     <span class="featured-badge">★ FEATURED</span>
                     <h3 class="project-title">Autonomous Quadcopter Flight Controller</h3>
                     <p class="project-description">
-                        A complete flight controller built from scratch using Arduino, implementing PID control algorithms 
+                        A complete flight controller built from scratch using Arduino Nano, implementing PID control algorithms 
                         for autonomous stabilization. This project demonstrates end-to-end systems engineering from hardware 
                         assembly to software optimization, achieving stable hover through real-time control at 250Hz.
                     </p>
                     
                     <div class="tech-stack">
-                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">Arduino Nano</span>
                         <span class="tech-tag">C/C++</span>
+                        <span class="tech-tag">MPU6050 IMU</span>
                         <span class="tech-tag">PID Control</span>
                         <span class="tech-tag">Sensor Fusion</span>
-                        <span class="tech-tag">I2C</span>
-                        <span class="tech-tag">PWM</span>
+                        <span class="tech-tag">PWM/ESC</span>
                     </div>
 
                     <ul class="project-highlights">
@@ -890,7 +893,7 @@
             autonomous systems, or eVTOL development. Let's talk!
         </p>
         <div class="contact-links">
-            <a href="mailto:cjmoor22@ncsu.edu" class="contact-link">Email</a>
+            <a href="/cdn-cgi/l/email-protection#5231383f3d3d206060123c3121277c373627" class="contact-link">Email</a>
             <a href="https://linkedin.com/in/camdenmoor228" class="contact-link">LinkedIn</a>
             <a href="#" class="contact-link">GitHub</a>
             <a href="/mnt/user-data/outputs/Camden_Moore_Resume_1Page_BETA.docx" class="contact-link">Resume</a>
@@ -900,10 +903,10 @@
     <!-- Footer -->
     <footer>
         <p>&copy; 2026 Camden Moore | Aerospace Engineering Student at NC State University</p>
-        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Raleigh, NC | cjmoor22@ncsu.edu | (828) 230-2974</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Raleigh, NC | <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="81e2ebeceeeef3b3b3c1efe2f2f4afe4e5f4">[email&#160;protected]</a> | (828) 230-2974</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -927,14 +930,3 @@
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            observer.observe(section);
-        });
-    </script>
-</body>
-</html>
