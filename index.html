@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camden Moore | Aerospace Engineering Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0A1628;
+            --secondary: #1e3a5f;
+            --accent: #00d9ff;
+            --accent-warm: #ff6b35;
+            --text: #e8eef5;
+            --text-dim: #8b9cb0;
+            --surface: #162236;
+            --surface-light: #1f2d42;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Animated grid background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--secondary) 1px, transparent 1px),
+                linear-gradient(90deg, var(--secondary) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.2;
+            z-index: -1;
+            animation: gridShift 20s linear infinite;
+        }
+
+        @keyframes gridShift {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 22, 40, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 2rem;
+            z-index: 1000;
+            border-bottom: 1px solid var(--secondary);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 400;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 2rem 4rem 2rem;
+            position: relative;
+        }
+
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--accent), var(--accent-warm));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .hero-text p {
+            font-size: 1.2rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-visual::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.3;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat-box {
+            background: var(--surface);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--secondary);
+            text-align: center;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .stat-number {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.5rem;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .stat-label {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s;
+            font-family: 'Work Sans', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: var(--text);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-tag {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            color: var(--text-dim);
+            font-size: 1.1rem;
+            max-width: 600px;
+        }
+
+        /* Featured Project - Quadcopter */
+        .featured-project {
+            background: linear-gradient(135deg, var(--surface), var(--surface-light));
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            border: 1px solid var(--secondary);
+            transition: transform 0.3s;
+        }
+
+        .featured-project:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+        }
+
+        .featured-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            padding: 3rem;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+
+        .project-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            background: var(--secondary);
+            padding: 0.4rem 1rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-family: 'Space Mono', monospace;
+            border: 1px solid var(--accent);
+        }
+
+        .project-highlights {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .project-highlights li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-dim);
+        }
+
+        .project-highlights li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .project-visual {
+            background: var(--primary);
+            border-radius: 8px;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-visual::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 60%);
+            opacity: 0.2;
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .project-placeholder {
+            font-family: 'Space Mono', monospace;
+            color: var(--accent);
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 3rem;
+            border: 2px dashed var(--secondary);
+            border-radius: 8px;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border-radius: 8px;
+            padding: 2rem;
+            border: 1px solid var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 217, 255, 0.1);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        .project-card p {
+            color: var(--text-dim);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid var(--secondary);
+        }
+
+        .skill-category h3 {
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category li {
+            padding: 0.5rem 0;
+            color: var(--text-dim);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-category li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--secondary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 3px solid var(--primary);
+        }
+
+        .timeline-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .timeline-meta {
+            color: var(--accent);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item p {
+            color: var(--text-dim);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--surface);
+            border-radius: 12px;
+            padding: 4rem;
+            text-align: center;
+            border: 1px solid var(--secondary);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            color: var(--text);
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .contact-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--secondary);
+            margin-top: 4rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero .container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Loading animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">CM</div>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container fade-in">
+            <div class="hero-text">
+                <div class="subtitle">Aerospace Engineering Student</div>
+                <h1>Camden Moore</h1>
+                <p>Building autonomous flight systems and exploring the future of electric aviation at NC State University.</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+                <div class="stats">
+                    <div class="stat-box">
+                        <div class="stat-number">3.2</div>
+                        <div class="stat-label">GPA</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="stat-number">2027</div>
+                        <div class="stat-label">Graduation</div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="hero-visual">
+                <!-- Decorative element -->
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <div class="section-tag">Who I Am</div>
+            <h2 class="section-title">About Me</h2>
+            <p class="section-description">
+                I'm a junior aerospace engineering student at NC State University with a passion for flight controls, 
+                autonomous systems, and electric aviation. Through hands-on projects and research, I'm bridging the 
+                gap between theory and real-world aerospace applications.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Project - Quadcopter -->
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-tag">What I Build</div>
+            <h2 class="section-title">Featured Project</h2>
+        </div>
+
+        <div class="featured-project">
+            <div class="featured-content">
+                <div>
+                    <span class="featured-badge">★ FEATURED</span>
+                    <h3 class="project-title">Autonomous Quadcopter Flight Controller</h3>
+                    <p class="project-description">
+                        A complete flight controller built from scratch using Arduino, implementing PID control algorithms 
+                        for autonomous stabilization. This project demonstrates end-to-end systems engineering from hardware 
+                        assembly to software optimization, achieving stable hover through real-time control at 250Hz.
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">Arduino</span>
+                        <span class="tech-tag">C/C++</span>
+                        <span class="tech-tag">PID Control</span>
+                        <span class="tech-tag">Sensor Fusion</span>
+                        <span class="tech-tag">I2C</span>
+                        <span class="tech-tag">PWM</span>
+                    </div>
+
+                    <ul class="project-highlights">
+                        <li>Implemented independent PID loops for roll, pitch, and yaw stabilization</li>
+                        <li>Integrated MPU6050 IMU with complementary filter for drift correction</li>
+                        <li>Developed motor mixing algorithm for differential thrust control</li>
+                        <li>Achieved stable autonomous flight through iterative PID tuning</li>
+                        <li>Real-time embedded programming at 250Hz update rate</li>
+                    </ul>
+
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary">View on GitHub</a>
+                        <a href="#" class="btn btn-secondary">Technical Details</a>
+                    </div>
+                </div>
+
+                <div class="project-visual">
+                    <div class="project-placeholder">
+                        [ Flight Demo Video ]<br><br>
+                        Add your quadcopter<br>
+                        flight footage here
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other Projects -->
+        <h3 style="font-size: 2rem; margin-bottom: 2rem; margin-top: 3rem;">Other Projects</h3>
+        <div class="projects-grid">
+            <div class="project-card">
+                <h3>Aircraft Mission Analysis</h3>
+                <p>Designed fixed-wing aircraft using MATLAB and Xfoil to meet specific mission requirements. 
+                   Performed comprehensive performance analysis including range, endurance, and flight envelope calculations.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">MATLAB</span>
+                    <span class="tech-tag">Xfoil</span>
+                    <span class="tech-tag">Aerodynamics</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Wing Panel Structural Optimization</h3>
+                <p>Optimized stiffened wing panel design using SolidWorks Simulation and FEA. Achieved 1.2 safety factor 
+                   while minimizing weight through iterative analysis of geometry and loading conditions.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">SolidWorks</span>
+                    <span class="tech-tag">FEA</span>
+                    <span class="tech-tag">Structures</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>Acoustic Testing Gantry System</h3>
+                <p>Designed and built automated 2-axis gantry system for acoustic testing. Programmed Arduino-based 
+                   stepper motor control for precision microphone array positioning in anechoic chamber experiments.</p>
+                <div class="tech-stack">
+                    <span class="tech-tag">Arduino</span>
+                    <span class="tech-tag">SolidWorks</span>
+                    <span class="tech-tag">Motor Control</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-tag">Technical Expertise</div>
+            <h2 class="section-title">Skills & Tools</h2>
+        </div>
+
+        <div class="skills-grid">
+            <div class="skill-category">
+                <h3>PROGRAMMING</h3>
+                <ul>
+                    <li>MATLAB (Control Systems, Data Analysis)</li>
+                    <li>Arduino / C / C++ (Embedded Systems)</li>
+                    <li>Python (Data Processing)</li>
+                    <li>Git / Version Control</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>CONTROL SYSTEMS</h3>
+                <ul>
+                    <li>PID Control Implementation</li>
+                    <li>Sensor Fusion & Filtering</li>
+                    <li>Real-Time Embedded Systems</li>
+                    <li>Motor Control Algorithms</li>
+                    <li>State Estimation</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>CAD & SIMULATION</h3>
+                <ul>
+                    <li>SolidWorks (3D Modeling, FEA)</li>
+                    <li>ANSYS (FEA, CFD)</li>
+                    <li>Xfoil (Airfoil Analysis)</li>
+                    <li>Technical Drawing</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>TESTING & ANALYSIS</h3>
+                <ul>
+                    <li>Data Acquisition Systems</li>
+                    <li>Anechoic Chamber Testing</li>
+                    <li>Signal Processing</li>
+                    <li>Experimental Data Reduction</li>
+                    <li>Lab Equipment (Oscilloscopes, DAQ)</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>FABRICATION</h3>
+                <ul>
+                    <li>Composite Layup Techniques</li>
+                    <li>Soldering & Electronics</li>
+                    <li>Shop Tools (Power & Hand)</li>
+                    <li>Rapid Prototyping</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h3>COURSEWORK</h3>
+                <ul>
+                    <li>Automatic Controls</li>
+                    <li>Flight Stability & Control</li>
+                    <li>Finite Element Analysis</li>
+                    <li>Aerodynamics I & II</li>
+                    <li>Aerospace Structures</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <div class="section-header">
+            <div class="section-tag">Where I've Worked</div>
+            <h2 class="section-title">Experience</h2>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <h3>Undergraduate Researcher</h3>
+                <div class="timeline-meta">NC State University Acoustics Lab | Aug 2025 – Present</div>
+                <p>• Designed dual-axis gantry system using SolidWorks for automated acoustic testing</p>
+                <p>• Programmed Arduino-based motor control system for precision microphone positioning</p>
+                <p>• Conducted anechoic chamber experiments analyzing toroidal propeller acoustics</p>
+                <p>• Performed beam-forming data analysis to optimize propeller geometry</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>AIAA Design/Build/Fly Team Member</h3>
+                <div class="timeline-meta">NC State Chapter | Aug 2024 – Present</div>
+                <p>• Fabricated competition aircraft components using composite layup techniques</p>
+                <p>• Collaborated with cross-functional teams on integrated design solutions</p>
+            </div>
+
+            <div class="timeline-item">
+                <h3>Rowing Club - Varsity Boats</h3>
+                <div class="timeline-meta">NC State University | Aug 2024 – Present</div>
+                <p>• Compete in varsity boats while maintaining rigorous engineering coursework</p>
+                <p>• Manage 15+ hours/week training alongside full academic schedule</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="section-tag">Let's Connect</div>
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-description" style="text-align: center; margin: 0 auto 2rem auto;">
+            I'm actively seeking summer 2026 internship opportunities in flight controls, 
+            autonomous systems, or eVTOL development. Let's talk!
+        </p>
+        <div class="contact-links">
+            <a href="mailto:cjmoor22@ncsu.edu" class="contact-link">Email</a>
+            <a href="https://linkedin.com/in/camdenmoor228" class="contact-link">LinkedIn</a>
+            <a href="#" class="contact-link">GitHub</a>
+            <a href="/mnt/user-data/outputs/Camden_Moore_Resume_1Page_BETA.docx" class="contact-link">Resume</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Camden Moore | Aerospace Engineering Student at NC State University</p>
+        <p style="margin-top: 0.5rem; font-size: 0.8rem;">Raleigh, NC | cjmoor22@ncsu.edu | (828) 230-2974</p>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
